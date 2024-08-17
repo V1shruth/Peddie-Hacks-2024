@@ -7,8 +7,8 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  # For session management
 
 # Spotify API credentials
-SPOTIPY_CLIENT_ID = 'your_client_id_here'
-SPOTIPY_CLIENT_SECRET = 'your_client_secret_here'
+SPOTIPY_CLIENT_ID = "598d210fb6724e52869a2f0ca9c5c9d5"
+SPOTIPY_CLIENT_SECRET = "da2ded1d6e8b4fcca5eff6477968d030"
 
 # Initialize Spotify client
 client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
