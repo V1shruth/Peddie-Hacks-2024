@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -74,32 +74,40 @@
             border-radius: 5px;
         }
     </style>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-    <h1>City Playlist Creator</h1>
-    <form method="POST">
-        <label for="user_input">Enter a city:</label><br>
-        <input type="text" id="user_input" name="user_input" required><br>
-        
-        <label for="genre">Select a genre (optional):</label><br>
-        <select id="genre" name="genre">
-            <option value="">All genres</option>
-            {% for genre in genres %}
-            <option value="{{ genre }}">{{ genre }}</option>
-            {% endfor %}
-        </select><br>
-        
-        <button type="submit">Create Playlist</button>
-    </form>
+    <div class="container">
+        <h1>Immersify</h1>
+        <form method="POST">
+            <label for="user_input">Enter a city:</label><br>
+            <input type="text" id="user_input" name="user_input" required><br>
+            
+            <label for="genre">Select a genre (optional):</label><br>
+            <select id="genre" name="genre">
+                <option value="">All genres</option>
+                {% for genre in genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select><br>
+            
+            <button type="submit">Create Playlist</button>
+        </form>
 
         {% if playlist %}
         <h2>Playlist for {{ city }}</h2>
         <ul>
             {% for song in playlist %}
-            <li>{{ song.title }} by {{ song.artist }} ({{ song.genre }})</li>
+            <li>
+                {{ song.title }} by {{ song.artist }} ({{ song.genre }})
+                {% if song.id %}
+                <iframe src="https://open.spotify.com/embed/track/{{ song.id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                {% endif %}
+            </li>
             {% endfor %}
         </ul>
         {% endif %}
     </div>
 </body>
 </html>
+
