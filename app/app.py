@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Sample data (replace with your actual data)
+# Dictonary containing cities with there most famous songs.
+# Each song is split into metadata
 city_songs = {
     "New York": [
         {"title": "Empire State of Mind", "artist": "Jay-Z", "genre": "Hip Hop"},
@@ -14,6 +15,7 @@ city_songs = {
     ],
 }
 
+#selcects songs after criteria is chosen
 genres = set(song["genre"] for songs in city_songs.values() for song in songs)
 
 @app.route("/", methods=["GET", "POST"])

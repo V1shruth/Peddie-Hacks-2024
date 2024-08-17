@@ -76,22 +76,21 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Immersify</h1>
-        <form method="POST">
-            <label for="user_input">Enter a city:</label>
-            <input type="text" id="user_input" name="user_input" required placeholder="e.g., New York">
-            
-            <label for="genre">Select a genre (optional):</label>
-            <select id="genre" name="genre">
-                <option value="">All genres</option>
-                {% for genre in genres %}
-                <option value="{{ genre }}">{{ genre }}</option>
-                {% endfor %}
-            </select>
-            
-            <button type="submit">Create Playlist</button>
-        </form>
+    <h1>City Playlist Creator</h1>
+    <form method="POST">
+        <label for="user_input">Enter a city:</label><br>
+        <input type="text" id="user_input" name="user_input" required><br>
+        
+        <label for="genre">Select a genre (optional):</label><br>
+        <select id="genre" name="genre">
+            <option value="">All genres</option>
+            {% for genre in genres %}
+            <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <button type="submit">Create Playlist</button>
+    </form>
 
         {% if playlist %}
         <h2>Playlist for {{ city }}</h2>
