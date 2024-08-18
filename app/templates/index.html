@@ -56,13 +56,16 @@
         }
         .genre-options {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
         }
-        .genre-button {
-            width: 18%;
-            padding: 10px;
-            margin: 10px 0;
+        .genre-options label {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        #generate-playlist {
+            margin-top: 20px;
+            padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -70,7 +73,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .genre-button:hover {
+        #generate-playlist:hover {
             background-color: #45a049;
         }
         .playlist {
@@ -108,14 +111,15 @@
         </div>
 
         <div id="genre-screen" class="screen">
-            <h2>Select a Genre for <span id="selected-city"></span></h2>
+            <h2>Select Genres for <span id="selected-city"></span></h2>
             <div class="genre-options">
-                <button class="genre-button" onclick="showPlaylistScreen('Pop')">Pop</button>
-                <button class="genre-button" onclick="showPlaylistScreen('Jazz')">Jazz</button>
-                <button class="genre-button" onclick="showPlaylistScreen('Rock')">Rock</button>
-                <button class="genre-button" onclick="showPlaylistScreen('Hip Hop')">Hip Hop</button>
-                <button class="genre-button" onclick="showPlaylistScreen('Classical')">Classical</button>
+                <label><input type="checkbox" name="genre" value="Pop"> Pop</label>
+                <label><input type="checkbox" name="genre" value="Jazz"> Jazz</label>
+                <label><input type="checkbox" name="genre" value="Rock"> Rock</label>
+                <label><input type="checkbox" name="genre" value="Hip Hop"> Hip Hop</label>
+                <label><input type="checkbox" name="genre" value="Classical"> Classical</label>
             </div>
+            <button id="generate-playlist" onclick="generatePlaylist()">Generate Playlist</button>
         </div>
 
         <div id="playlist-screen" class="screen">
@@ -128,19 +132,33 @@
 
     <script>
         let selectedCity = '';
+        let selectedGenres = [];
 
         function showGenreScreen(city) {
             document.getElementById('map-screen').style.display = 'none';
             document.getElementById('genre-screen').style.display = 'block';
             document.getElementById('selected-city').textContent = city;
             selectedCity = city;
+            // Reset genre selections
+            selectedGenres = [];
+            document.querySelectorAll('input[name="genre"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
         }
 
-        function showPlaylistScreen(genre) {
+        function generatePlaylist() {
+            selectedGenres = Array.from(document.querySelectorAll('input[name="genre"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            if (selectedGenres.length === 0) {
+                alert("Please select at least one genre.");
+                return;
+            }
+
             document.getElementById('genre-screen').style.display = 'none';
             document.getElementById('playlist-screen').style.display = 'block';
             document.getElementById('city-playlist').textContent = selectedCity;
-            document.getElementById('genre-playlist').textContent = genre;
+            document.getElementById('genre-playlist').textContent = selectedGenres.join(', ');
             
             // Simulate playlist creation (replace with actual API call in real implementation)
             const playlistContainer = document.getElementById('playlist-container');
