@@ -198,6 +198,24 @@
         .back-button:hover {
             background-color: #45a049;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .pagination button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -205,7 +223,6 @@
         <button class="back-button" onclick="goBack()">Back</button>
         <h1 data-text="IMMERSIFY"></h1>
 
-        
         <div id="map-screen" class="screen">
             <h2>Uncover the World's Rhythm</h2>
             <div id="map">
@@ -231,12 +248,20 @@
             <div class="playlist" id="playlist-container">
                 <!-- Playlist will be populated dynamically -->
             </div>
+            <div class="pagination">
+                <button id="prev-page" onclick="prevPage()">Previous Page</button>
+                <button id="next-page" onclick="nextPage()">Next Page</button>
+            </div>
         </div>
     </div>
 
     <script>
         let selectedCity = '';
         let selectedGenres = [];
+        let currentPage = 1;
+        let songsPerPage = 5;
+        let totalSongs = 0;
+        let spotifyPlaylist = [];
 
         function showGenreScreen(city) {
             document.getElementById('map-screen').style.display = 'none';
@@ -271,26 +296,51 @@
             })
             .then(response => response.json())
             .then(data => {
+                spotifyPlaylist = data;
+                totalSongs = spotifyPlaylist.length;
+                currentPage = 1;
+                displayPage();
                 document.getElementById('genre-screen').style.display = 'none';
                 document.getElementById('playlist-screen').style.display = 'block';
                 document.getElementById('city-playlist').textContent = selectedCity;
                 document.getElementById('genre-playlist').textContent = selectedGenres.join(', ');
-                
-                const playlistContainer = document.getElementById('playlist-container');
-                playlistContainer.innerHTML = '';
-                
-                data.forEach(song => {
-                    const songElement = document.createElement('div');
-                    songElement.className = 'song';
-                    songElement.innerHTML = `
-                        <iframe src="https://open.spotify.com/embed/track/${song.id}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                    `;
-                    playlistContainer.appendChild(songElement);
-                });
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
+        }
+
+        function displayPage() {
+            const playlistContainer = document.getElementById('playlist-container');
+            playlistContainer.innerHTML = '';
+            const start = (currentPage - 1) * songsPerPage;
+            const end = Math.min(start + songsPerPage, totalSongs);
+            for (let i = start; i < end; i++) {
+                const song = spotifyPlaylist[i];
+                const songElement = document.createElement('div');
+                songElement.className = 'song';
+                songElement.innerHTML = `
+                    <iframe src="https://open.spotify.com/embed/track/${song.id}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                `;
+                playlistContainer.appendChild(songElement);
+            }
+
+            document.getElementById('prev-page').style.display = currentPage > 1 ? 'inline-block' : 'none';
+            document.getElementById('next-page').style.display = end < totalSongs ? 'inline-block' : 'none';
+        }
+
+        function nextPage() {
+            if (currentPage * songsPerPage < totalSongs) {
+                currentPage++;
+                displayPage();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPage();
+            }
         }
 
         function goBack() {
