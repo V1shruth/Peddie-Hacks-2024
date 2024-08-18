@@ -1,9 +1,9 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Playlist Creator</title>
+    <title>Immersify - City Music Explorer</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,36 +23,43 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.18);
-            max-width: 500px;
+            max-width: 800px;
             width: 100%;
         }
-        h1 {
+        h1, h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
+        #map {
+            height: 400px;
             background-color: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .city-marker {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
         }
-        button {
-            padding: 10px 20px;
+        .city-marker:hover {
+            background-color: #45a049;
+        }
+        .genre-options {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .genre-button {
+            width: 18%;
+            padding: 10px;
+            margin: 10px 0;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -60,18 +67,25 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        button:hover {
+        .genre-button:hover {
             background-color: #45a049;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
+        .playlist {
             background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .song {
             margin-bottom: 10px;
             padding: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
+        }
+        .screen {
+            display: none;
+        }
+        #map-screen {
+            display: block;
         }
     </style>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
@@ -79,35 +93,78 @@
 <body>
     <div class="container">
         <h1>Immersify</h1>
-        <form method="POST">
-            <label for="user_input">Enter a city:</label><br>
-            <input type="text" id="user_input" name="user_input" required><br>
-            
-            <label for="genre">Select a genre (optional):</label><br>
-            <select id="genre" name="genre">
-                <option value="">All genres</option>
-                {% for genre in genres %}
-                <option value="{{ genre }}">{{ genre }}</option>
-                {% endfor %}
-            </select><br>
-            
-            <button type="submit">Create Playlist</button>
-        </form>
+        
+        <div id="map-screen" class="screen">
+            <h2>City Music Explorer</h2>
+            <div id="map">
+                <!-- Placeholder for map -->
+                <div class="city-marker">New York</div>
+                <div class="city-marker">London</div>
+                <div class="city-marker">Tokyo</div>
+                <!-- Add more city markers as needed -->
+            </div>
+        </div>
 
-        {% if playlist %}
-        <h2>Playlist for {{ city }}</h2>
-        <ul>
-            {% for song in playlist %}
-            <li>
-                {{ song.title }} by {{ song.artist }} ({{ song.genre }})
-                {% if song.id %}
-                <iframe src="https://open.spotify.com/embed/track/{{ song.id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+        <div id="genre-screen" class="screen">
+            <h2>Select a Genre for <span id="selected-city"></span></h2>
+            <div class="genre-options">
+                <button class="genre-button">Pop</button>
+                <button class="genre-button">Jazz</button>
+                <button class="genre-button">Rock</button>
+                <button class="genre-button">Country</button>
+                <button class="genre-button">Classical</button>
+            </div>
+        </div>
+
+        <div id="playlist-screen" class="screen">
+            <h2>Your <span id="genre-playlist"></span> Playlist for <span id="city-playlist"></span></h2>
+            <div class="playlist">
+                <!-- Playlist will be populated dynamically -->
+                <div class="song">
+                    Song 1 - Artist 1
+                    <iframe src="https://open.spotify.com/embed/track/example_id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                <!-- More songs will be added here -->
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Placeholder for JavaScript functionality
+        function showMapScreen() {
+            document.getElementById('map-screen').style.display = 'block';
+            document.getElementById('genre-screen').style.display = 'none';
+            document.getElementById('playlist-screen').style.display = 'none';
+        }
+
+        function showGenreScreen(city) {
+            document.getElementById('map-screen').style.display = 'none';
+            document.getElementById('genre-screen').style.display = 'block';
+            document.getElementById('playlist-screen').style.display = 'none';
+            document.getElementById('selected-city').textContent = city;
+        }
+
+        function showPlaylistScreen(city, genre) {
+            document.getElementById('map-screen').style.display = 'none';
+            document.getElementById('genre-screen').style.display = 'none';
+            document.getElementById('playlist-screen').style.display = 'block';
+            document.getElementById('city-playlist').textContent = city;
+            document.getElementById('genre-playlist').textContent = genre;
+            // Here you would also populate the playlist with actual songs
+        }
+
+        // Add event listeners to city markers and genre buttons
+        document.querySelectorAll('.city-marker').forEach(marker => {
+            marker.addEventListener('click', function() {
+                showGenreScreen(this.textContent);
+            });
+        });
+
+        document.querySelectorAll('.genre-button').forEach(button => {
+            button.addEventListener('click', function() {
+                showPlaylistScreen(document.getElementById('selected-city').textContent, this.textContent);
+            });
+        });
+    </script>
 </body>
 </html>
-
