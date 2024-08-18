@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immersify - City Music Explorer</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #ffffff;
             margin: 0;
@@ -94,7 +93,6 @@
             display: block;
         }
     </style>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
     <div class="container">
@@ -113,11 +111,9 @@
         <div id="genre-screen" class="screen">
             <h2>Select Genres for <span id="selected-city"></span></h2>
             <div class="genre-options">
-                <label><input type="checkbox" name="genre" value="Pop"> Pop</label>
-                <label><input type="checkbox" name="genre" value="Jazz"> Jazz</label>
-                <label><input type="checkbox" name="genre" value="Rock"> Rock</label>
-                <label><input type="checkbox" name="genre" value="Hip Hop"> Hip Hop</label>
-                <label><input type="checkbox" name="genre" value="Classical"> Classical</label>
+                {% for genre in genres %}
+                <label><input type="checkbox" name="genre" value="{{ genre }}"> {{ genre }}</label>
+                {% endfor %}
             </div>
             <button id="generate-playlist" onclick="generatePlaylist()">Generate Playlist</button>
         </div>
@@ -139,7 +135,6 @@
             document.getElementById('genre-screen').style.display = 'block';
             document.getElementById('selected-city').textContent = city;
             selectedCity = city;
-            // Reset genre selections
             selectedGenres = [];
             document.querySelectorAll('input[name="genre"]').forEach(checkbox => {
                 checkbox.checked = false;
@@ -155,30 +150,38 @@
                 return;
             }
 
-            document.getElementById('genre-screen').style.display = 'none';
-            document.getElementById('playlist-screen').style.display = 'block';
-            document.getElementById('city-playlist').textContent = selectedCity;
-            document.getElementById('genre-playlist').textContent = selectedGenres.join(', ');
-            
-            // Simulate playlist creation (replace with actual API call in real implementation)
-            const playlistContainer = document.getElementById('playlist-container');
-            playlistContainer.innerHTML = ''; // Clear previous playlist
-            
-            // Sample songs (replace with actual data from your backend)
-            const sampleSongs = [
-                { title: "Song 1", artist: "Artist 1", id: "spotify:track:example_id1" },
-                { title: "Song 2", artist: "Artist 2", id: "spotify:track:example_id2" },
-                { title: "Song 3", artist: "Artist 3", id: "spotify:track:example_id3" }
-            ];
-
-            sampleSongs.forEach(song => {
-                const songElement = document.createElement('div');
-                songElement.className = 'song';
-                songElement.innerHTML = `
-                    ${song.title} - ${song.artist}
-                    <iframe src="https://open.spotify.com/embed/track/${song.id.split(':')[2]}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                `;
-                playlistContainer.appendChild(songElement);
+            fetch('/generate_playlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    city: selectedCity,
+                    genres: selectedGenres
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('genre-screen').style.display = 'none';
+                document.getElementById('playlist-screen').style.display = 'block';
+                document.getElementById('city-playlist').textContent = selectedCity;
+                document.getElementById('genre-playlist').textContent = selectedGenres.join(', ');
+                
+                const playlistContainer = document.getElementById('playlist-container');
+                playlistContainer.innerHTML = '';
+                
+                data.forEach(song => {
+                    const songElement = document.createElement('div');
+                    songElement.className = 'song';
+                    songElement.innerHTML = `
+                        ${song.title} - ${song.artist}
+                        <iframe src="https://open.spotify.com/embed/track/${song.id}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    `;
+                    playlistContainer.appendChild(songElement);
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
         }
     </script>

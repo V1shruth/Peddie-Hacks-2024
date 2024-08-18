@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # For session management
+app.secret_key = os.urandom(24)
 
 # Spotify API credentials
 SPOTIPY_CLIENT_ID = "598d210fb6724e52869a2f0ca9c5c9d5"
@@ -122,7 +122,7 @@ def get_spotify_track(title, artist):
         print(f"Error searching for track: {e}")
     return None
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
     return render_template("index.html", genres=genres)
 
@@ -137,7 +137,6 @@ def generate_playlist():
         if selected_genres:
             playlist = [song for song in playlist if song["genre"] in selected_genres]
         
-        # Get Spotify data for each song
         spotify_playlist = []
         for song in playlist:
             spotify_data = get_spotify_track(song['title'], song['artist'])
