@@ -109,14 +109,17 @@ genres = set(song["genre"] for songs in city_songs.values() for song in songs)
 
 def get_spotify_track(title, artist):
     query = f"track:{title} artist:{artist}"
-    results = sp.search(q=query, type='track', limit=1)
-    if results['tracks']['items']:
-        track = results['tracks']['items'][0]
-        return {
-            'id': track['id'],
-            'url': track['external_urls']['spotify'],
-            'preview_url': track['preview_url']
-        }
+    try:
+        results = sp.search(q=query, type='track', limit=1)
+        if results['tracks']['items']:
+            track = results['tracks']['items'][0]
+            return {
+                'id': track['id'],
+                'url': track['external_urls']['spotify'],
+                'preview_url': track['preview_url']
+            }
+    except Exception as e:
+        print(f"Error searching for track: {e}")
     return None
 
 @app.route("/", methods=["GET"])
@@ -154,4 +157,3 @@ def generate_playlist():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
