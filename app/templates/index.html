@@ -147,7 +147,7 @@
         }
 
         function generatePlaylist() {
-            selrray.from(document.querySelectorAll('input[name="genre"]:checked'))
+            selectedGenres = Array.from(document.querySelectorAll('input[name="genre"]:checked'))
                 .map(checkbox => checkbox.value);
             
             if (selectedGenres.length === 0) {

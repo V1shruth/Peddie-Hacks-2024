@@ -119,26 +119,39 @@ def get_spotify_track(title, artist):
         }
     return None
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
-    if request.method == "POST":
-        user_input = request.form["user_input"]
-        selected_genre = request.form["genre"]
-        
-        if user_input in city_songs:
-            playlist = city_songs[user_input]
-            if selected_genre:
-                playlist = [song for song in playlist if song["genre"] == selected_genre]
-            
-            # Get Spotify data for each song
-            for song in playlist:
-                spotify_data = get_spotify_track(song['title'], song['artist'])
-                if spotify_data:
-                    song.update(spotify_data)
-            
-            return render_template("index.html", city=user_input, playlist=playlist, genres=genres)
-    
     return render_template("index.html", genres=genres)
+
+@app.route("/generate_playlist", methods=["POST"])
+def generate_playlist():
+    data = request.json
+    city = data.get('city')
+    selected_genres = data.get('genres', [])
+    
+    if city in city_songs:
+        playlist = city_songs[city]
+        if selected_genres:
+            playlist = [song for song in playlist if song["genre"] in selected_genres]
+        
+        # Get Spotify data for each song
+        spotify_playlist = []
+        for song in playlist:
+            spotify_data = get_spotify_track(song['title'], song['artist'])
+            if spotify_data:
+                song_data = {
+                    'title': song['title'],
+                    'artist': song['artist'],
+                    'id': spotify_data['id'],
+                    'url': spotify_data['url'],
+                    'preview_url': spotify_data['preview_url']
+                }
+                spotify_playlist.append(song_data)
+        
+        return jsonify(spotify_playlist)
+    
+    return jsonify([])
 
 if __name__ == "__main__":
     app.run(debug=True)
+    

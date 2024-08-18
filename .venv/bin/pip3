@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Users/ashmitrama/VS Code/Peddie-Hacks-2024/Peddie-Hacks-2024/.venv/bin/python3" "$0" "$@"
-' '''
+#!/Users/vishruth/Peddie-Hacks-2024-3/.venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
