@@ -1,78 +1,117 @@
 city,title,artist,genre
-London,London Calling,The Clash,Pop
-London,Waterloo Sunset,The Kinks,Rock
-London,A Day in the Life,The Beatles,Rock
-London,Baker Street,Gerry Rafferty,Rock
-London,West End Girls,Pet Shop Boys,Pop
-London,Streets of London,Ralph McTell,Pop
-London,LDN,Lily Allen,Pop
-London,Sunny Afternoon,The Kinks,Rock
-London,Electric Avenue,Eddy Grant,Pop
-London,London Bridge,Fergie,Pop
-London,London Boy,Taylor Swift,Pop
-London,Werewolves of London,Warren Zevon,Rock
-London,A Foggy Day (In London Town),Ella Fitzgerald,Jazz
-London,Hometown Glory,Adele,Pop
-London,Itchycoo Park,Small Faces,Rock
-London,Brixton,Gallant,Pop
-London,Lullaby of London,The Pogues,Rock
-London,Primrose Hill,John & Beverley Martyn,Pop
-London,Maybe It's Because I'm a Londoner,Davy Jones,Pop
-London,That's Entertainment,The Jam,Rock
-Tokyo,Tokyo Drift,Teriyaki Boyz,Pop
-Tokyo,Sukiyaki,Kyu Sakamoto,Pop
-Tokyo,Shinunoga E-Wa,Fujii Kaze,Pop
-Tokyo,Plastic Love,Mariya Takeuchi,Pop
-Tokyo,Shibuya-kei,Pizzicato Five,Pop
-Tokyo,Tokyo,YUI,Pop
-Tokyo,Battle Without Honor or Humanity,Tomoyasu Hotei,Rock
-Tokyo,"One More Time, One More Chance",Masayoshi Yamazaki,Pop
-Tokyo,Fireworks,DAOKO x Kenshi Yonezu,Pop
-Tokyo,Hikaru Nara,Goose house,Pop
-Tokyo,Tokyo Tower,May J.,Pop
-Tokyo,Cherry Blossom Ending,Busker Busker,Pop
-Tokyo,Blue Bird,Ikimono Gakari,Pop
-Tokyo,Ode to Tokyo,Aimer,Pop
-Tokyo,Silhouette,KANA-BOON,Rock
-Tokyo,Densha ni Noru,Hikaru Utada,Pop
-Tokyo,Sayonara I Love You,Shota Shimizu,Pop
-Tokyo,Tokyo Nights,Digitalism,Pop
-Tokyo,Tokyo Vampire Hotel,tricot,Rock
-Tokyo,Lonely Tokyo,Sara Kays,Pop
-New York,Empire State of Mind,Jay-Z,Pop
-New York,"New York, New York",Frank Sinatra,Jazz
-New York,No Sleep Till Brooklyn,Beastie Boys,Rock
-New York,Autumn in New York,Billie Holiday,Jazz
-New York,The Message,Grandmaster Flash,Pop
-New York,New York State of Mind,Nas,Pop
-New York,Chelsea Morning,Joni Mitchell,Pop
-New York,Hotline Bling,Drake,Pop
-New York,Welcome to New York,Taylor Swift,Pop
-New York,Juicy,The Notorious B.I.G.,Pop
-New York,New York Groove,Ace Frehley,Rock
-New York,I Love New York,Madonna,Pop
-New York,Englishman in New York,Sting,Rock
-New York,Manhattan,Ella Fitzgerald,Jazz
-New York,Harlem Shuffle,Bob & Earl,Pop
-New York,New York City Cops,The Strokes,Rock
-New York,The Only Living Boy in New York,Simon & Garfunkel,Rock
-New York,New York Minute,Don Henley,Rock
-New York,New York City Boy,Pet Shop Boys,Pop
-New York,Take the 'A' Train,Duke Ellington,Jazz
-New Delhi,Delhi-6,Rekha Bhardwaj,Pop
-New Delhi,Kajra Re,Alisha Chinai,Pop
-New Delhi,Ye Dilli Hai Mere Yaar,Kailash Kher,Pop
-New Delhi,Dilliwaali Girlfriend,Arijit Singh,Pop
-New Delhi,Kabhi Kabhi Aditi,Rashid Ali,Pop
-New Delhi,Delhi Belly,Ram Sampath,Pop
-New Delhi,Tunak Tunak Tun,Daler Mehndi,Pop
-New Delhi,Dilli,A.R. Rahman,Pop
-New Delhi,Chaiyya Chaiyya,Sukhwinder Singh,Pop
-New Delhi,Jai Ho,A.R. Rahman,Pop
-New Delhi,Dilli Di Kudiyaan,Shankar-Ehsaan-Loy,Pop
-New Delhi,Desi Girl,Sunidhi Chauhan,Pop
-New Delhi,Aye Hip Hopper,Ishq Bector,Pop
-New Delhi,Mundiyan To Bach Ke,Panjabi MC,Pop
-New Delhi,Gallan Goodiyaan,Shankar Mahadevan,Pop
-New Delhi,High Heels,Honey Singh,Pop
-New Delhi,Abhi Toh Party Shuru Hui Hai,Badshah,Pop
+London,"London Calling","The Clash","Pop"
+London,"Let It Be","The Beatles","Rock"
+London,"Strange Weather","Marianne Faithfull","Jazz"
+London,"Fantasia on a Theme by Thomas Tallis","Ralph Vaughan Williams","Classical"
+London,"King of the Road","Roger Miller","Country"
+London,"West End Girls","Pet Shop Boys","Pop"
+London,"Satisfaction","The Rolling Stones","Rock"
+London,"Round Midnight","Thelonious Monk","Jazz"
+London,"Enigma Variations","Edward Elgar","Classical"
+London,"Take Me Home, Country Roads","John Denver","Country"
+London,"Waterloo Sunset","The Kinks","Pop"
+London,"Whole Lotta Love","Led Zeppelin","Rock"
+London,"My Funny Valentine","Chet Baker","Jazz"
+London,"The Planets","Gustav Holst","Classical"
+London,"Jolene","Dolly Parton","Country"
+London,"Don't Look Back in Anger","Oasis","Pop"
+London,"Bohemian Rhapsody","Queen","Rock"
+London,"Take Five","Dave Brubeck","Jazz"
+London,"Pomp and Circumstance","Edward Elgar","Classical"
+London,"Man! I Feel Like a Woman!","Shania Twain","Country"
+Tokyo,"Tokyo Drift","Teriyaki Boyz","Pop"
+Tokyo,"J-Rock Anthem","One OK Rock","Rock"
+Tokyo,"Tokyo Blues","Tokyo Ska Paradise Orchestra","Jazz"
+Tokyo,"Cherry Blossoms","Traditional","Classical"
+Tokyo,"Japanese Country","Kiyoshi Hikawa","Country"
+Tokyo,"Plastic Love","Mariya Takeuchi","Pop"
+Tokyo,"The Beginning","One OK Rock","Rock"
+Tokyo,"Blue Train","Tokyo Ska Paradise Orchestra","Jazz"
+Tokyo,"Moonlight Sonata","Ludwig van Beethoven","Classical"
+Tokyo,"Yuki no Hana","Mika Nakashima","Country"
+Tokyo,"First Love","Hikaru Utada","Pop"
+Tokyo,"Zankoku na Tenshi no Teeze","Yoko Takahashi","Rock"
+Tokyo,"Tokyo Jazz","Tokyo Jazz Joints","Jazz"
+Tokyo,"Sakura","Traditional","Classical"
+Tokyo,"Umi Yukaba","Traditional","Country"
+Tokyo,"Lemon","Kenshi Yonezu","Pop"
+Tokyo,"Red Swan","Yoshiki feat. Hyde","Rock"
+Tokyo,"Midnight Tokyo","Various Artists","Jazz"
+Tokyo,"Nocturne","Frédéric Chopin","Classical"
+Tokyo,"Tokyo Cowboy","Jon Regen","Country"
+New York,"Empire State of Mind","Jay-Z","Pop"
+New York,"New York, New York","Frank Sinatra","Rock"
+New York,"Autumn in New York","Billie Holiday","Jazz"
+New York,"Rhapsody in Blue","George Gershwin","Classical"
+New York,"City of New Orleans","Arlo Guthrie","Country"
+New York,"New York State of Mind","Billy Joel","Pop"
+New York,"Start Spreading the News","Frank Sinatra","Rock"
+New York,"Take the 'A' Train","Duke Ellington","Jazz"
+New York,"Adagio for Strings","Samuel Barber","Classical"
+New York,"I'm So Lonesome I Could Cry","Hank Williams","Country"
+New York,"Welcome to New York","Taylor Swift","Pop"
+New York,"Born to Run","Bruce Springsteen","Rock"
+New York,"Stardust","Louis Armstrong","Jazz"
+New York,"Appalachian Spring","Aaron Copland","Classical"
+New York,"Ring of Fire","Johnny Cash","Country"
+New York,"Jenny from the Block","Jennifer Lopez","Pop"
+New York,"Living for the City","Stevie Wonder","Rock"
+New York,"Round Midnight","Thelonious Monk","Jazz"
+New York,"Symphony No. 9","Antonín Dvořák","Classical"
+New York,"Take Me Home, Country Roads","John Denver","Country"
+New Delhi,"Delhi-6","Rekha Bhardwaj","Pop"
+New Delhi,"Rock On","Farhan Akhtar","Rock"
+New Delhi,"Raga Jog","Pandit Ravi Shankar","Jazz"
+New Delhi,"Vande Mataram","A. R. Rahman","Classical"
+New Delhi,"Tum Hi Ho","Arijit Singh","Country"
+New Delhi,"Kala Chashma","Amar Arshi, Badshah, Neha Kakkar","Pop"
+New Delhi,"Pichle Saat Dinon Mein","Farhan Akhtar","Rock"
+New Delhi,"Raga Bhairav","Ustad Bismillah Khan","Jazz"
+New Delhi,"Jana Gana Mana","Various Artists","Classical"
+New Delhi,"Mere Rashke Qamar","Rahat Fateh Ali Khan","Country"
+New Delhi,"Chaiyya Chaiyya","Sukhwinder Singh","Pop"
+New Delhi,"Sadda Haq","Mohit Chauhan","Rock"
+New Delhi,"Raga Yaman","Pandit Ravi Shankar","Jazz"
+New Delhi,"Saare Jahan Se Achha","Various Artists","Classical"
+New Delhi,"Naina","Arijit Singh","Country"
+New Delhi,"Tunak Tunak Tun","Daler Mehndi","Pop"
+New Delhi,"Allah Ke Bande","Kailash Kher","Rock"
+New Delhi,"Raga Kafi","Ustad Bismillah Khan","Jazz"
+New Delhi,"Ma Tujhe Salaam","A. R. Rahman","Classical"
+London,"A Day in the Life","The Beatles","Pop"
+London,"While My Guitar Gently Weeps","The Beatles","Rock"
+London,"All Blues","Miles Davis","Jazz"
+London,"Symphony No. 5","Ludwig van Beethoven","Classical"
+London,"Folsom Prison Blues","Johnny Cash","Country"
+London,"Dancing Queen","ABBA","Pop"
+London,"Wish You Were Here","Pink Floyd","Rock"
+London,"Moanin'","Charles Mingus","Jazz"
+London,"Rite of Spring","Igor Stravinsky","Classical"
+London,"Ring of Fire","Johnny Cash","Country"
+Tokyo,"Shinunoga E-Wa","Fujii Kaze","Pop"
+Tokyo,"Koi","Gen Hoshino","Pop"
+Tokyo,"Ain't No Sunshine","Sakamoto Ryuichi","Jazz"
+Tokyo,"Gagaku","Traditional","Classical"
+Tokyo,"Omoide No Maan","Ikimono Gakari","Pop"
+Tokyo,"Hoshi no Koi","Aimer","Pop"
+Tokyo,"Kaze wa Fuiteiru","AKB48","Pop"
+Tokyo,"Sakura Sakura","Traditional","Classical"
+Tokyo,"Taiko Drumming","Traditional","Jazz"
+Tokyo,"Midnight Train to Tokyo","Yoshida Brothers","Country"
+New York,"New York, New York","Liza Minnelli","Pop"
+New York,"New York Minute","Billy Joel","Pop"
+New York,"My Funny Valentine","Ella Fitzgerald","Jazz"
+New York,"The Four Seasons","Antonio Vivaldi","Classical"
+New York,"Jailhouse Rock","Elvis Presley","Rock"
+New York,"Crazy","Patsy Cline","Country"
+New York,"Take Five","Dave Brubeck","Jazz"
+New York,"Lullaby of Birdland","Sarah Vaughan","Jazz"
+New Delhi,"Tere Bina","A.R. Rahman","Pop"
+New Delhi,"Pee Loon","Mohit Chauhan","Rock"
+New Delhi,"Raga Marwa","Pandit Ravi Shankar","Jazz"
+New Delhi,"Aye Mere Watan Ke Logon","Lata Mangeshkar","Classical"
+New Delhi,"Dil Se","A.R. Rahman","Country"
+New Delhi,"Mera Joota Hai Japani","Mohammad Rafi","Pop"
+New Delhi,"Ae Mere Humsafar","Maanvi Gagroo","Pop"
+New Delhi,"Keh Do Ke Tum","Kishore Kumar","Pop"
+New Delhi,"Tera Ban Jaunga","Akhil Sachdeva","Pop"
