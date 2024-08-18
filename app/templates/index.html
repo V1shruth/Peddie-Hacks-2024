@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immersify - City Music Explorer</title>
     <style>
+        :root {
+            --color-background: #000119;
+            --stroke-width: calc(1em / 16);
+            --font-size: 30vmin;
+            --font-weight: 700;
+            --letter-spacing: calc(1em / 8);
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -17,6 +30,7 @@
             align-items: center;
         }
         .container {
+            position: relative;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 40px;
@@ -25,12 +39,74 @@
             border: 1px solid rgba(255, 255, 255, 0.18);
             max-width: 800px;
             width: 100%;
-        }
-        h1, h2 {
             text-align: center;
+        }
+        h1 {
+            position: relative;
+            font-size: 4em;
+            letter-spacing: 5px;
+            font-family: sans-serif;
+            display: table;
+            margin: 40px auto;
+            cursor: pointer;
+            transition: .6s;
+        }
+        h1:before,
+        h1:after {
+            content: attr(data-text);
+            transition: .6s;
+        }
+        h1:before {
+            left: 0;
+            top: 0;
+            position: absolute;
+            z-index: -1;
+            text-shadow:
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px,
+                0px 0px;
+            -webkit-mask: repeating-linear-gradient(45deg, transparent 0 3px, rgba(0,0,0,0.5) 0 6px);
+                    mask: repeating-linear-gradient(45deg, transparent 0 3px, rgba(0,0,0,0.5) 0 6px);
+        }
+        h1:hover {
+            transform: translate(-10px, -10px);
+        }  
+        h1:hover:before {
+            text-shadow:
+                1px 1px,
+                2px 2px,
+                3px 3px,
+                4px 4px,
+                5px 5px,
+                6px 6px,
+                7px 7px,
+                8px 8px,
+                9px 9px,
+                10px 10px;
+        }
+        h2 {
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-image: -webkit-gradient(linear, left top, right top, from(#09f1b8), color-stop(#00a2ff), color-stop(#ff00d2), to(#fed90f));
+            background-image: -o-linear-gradient(left, #09f1b8, #00a2ff, #ff00d2, #fed90f);
+            background-image: linear-gradient(to right, #09f1b8, #00a2ff, #ff00d2, #fed90f);
+            color: #000119;
+            color: var(--color-background);
+            font-size: 3vmin;
+            font-weight: var(--font-weight);
+            letter-spacing: calc(1em / 8);
+            padding: calc(--stroke-width / 2);
+            -webkit-text-stroke-color: transparent;
+            -webkit-text-stroke-width: calc(1em / 16);
+            -webkit-text-stroke-width: var(--stroke-width);
             margin-bottom: 30px;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         #map {
             position: relative;
@@ -57,7 +133,7 @@
         .genre-options {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
         }
         .genre-options label {
             margin: 5px 0;
@@ -80,12 +156,24 @@
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .song {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             padding: 10px;
             background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
+            border-radius: 10px;
+            display: block;
+            width: 320px;
+        }
+        .song iframe {
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 10px;
+            border: none;
         }
         .screen {
             display: none;
@@ -93,14 +181,33 @@
         #map-screen {
             display: block;
         }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1000;
+            display: none; /* Initially hidden */
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Immersify</h1>
+        <button class="back-button" onclick="goBack()">Back</button>
+        <h1 data-text="IMMERSIFY"></h1>
+
         
         <div id="map-screen" class="screen">
-            <h2>City Music Explorer</h2>
+            <h2>Uncover the World's Rhythm</h2>
             <div id="map">
                 <div class="city-marker" style="top: 35%; left: 24%;" onclick="showGenreScreen('New York')">NY</div>
                 <div class="city-marker" style="top: 28%; left: 45%;" onclick="showGenreScreen('London')">LN</div>
@@ -133,6 +240,7 @@
 
         function showGenreScreen(city) {
             document.getElementById('map-screen').style.display = 'none';
+            document.querySelector('.back-button').style.display = 'block';  // Show back button
             document.getElementById('genre-screen').style.display = 'block';
             document.getElementById('selected-city').textContent = city;
             selectedCity = city;
@@ -175,7 +283,6 @@
                     const songElement = document.createElement('div');
                     songElement.className = 'song';
                     songElement.innerHTML = `
-                        ${song.title} - ${song.artist}
                         <iframe src="https://open.spotify.com/embed/track/${song.id}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     `;
                     playlistContainer.appendChild(songElement);
@@ -184,6 +291,17 @@
             .catch((error) => {
                 console.error('Error:', error);
             });
+        }
+
+        function goBack() {
+            if (document.getElementById('playlist-screen').style.display === 'block') {
+                document.getElementById('playlist-screen').style.display = 'none';
+                document.getElementById('genre-screen').style.display = 'block';
+            } else if (document.getElementById('genre-screen').style.display === 'block') {
+                document.getElementById('genre-screen').style.display = 'none';
+                document.getElementById('map-screen').style.display = 'block';
+                document.querySelector('.back-button').style.display = 'none';  // Hide back button
+            }
         }
     </script>
 </body>
